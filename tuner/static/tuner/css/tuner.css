@@ -1,0 +1,127 @@
+body {
+    font-family: monospace;
+    background: #111;
+    color: #fff;
+    text-align: center;
+}
+
+h1 {
+    font-size: 125px;
+    margin-bottom: 5px;
+}
+
+h2 {
+    font-size: 100px;
+    margin-bottom: 100px;
+}
+
+        /* Center the controls form */
+        #controls-form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        #controls-form button, #controls-form select {
+            font-family: monospace;
+            font-size: 14px;
+            padding: 6px 12px;
+            border-radius: 4px;
+            border: 1px solid #555;
+            background-color: #222;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        #controls-form button:hover, #controls-form select:hover {
+            border-color: #888;
+        }
+
+        #controls-form a.button {
+            text-decoration: none;
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 4px;
+            border: 1px solid #555;
+            background-color: #222;
+            color: #fff;
+        }
+
+        #controls-form a.button:hover {
+            border-color: #888;
+        }
+
+
+#tuning-label {
+    font-family: monospace;
+    font-size: 14px;
+    opacity: 0.7;
+    margin-bottom: 20px;
+}
+
+/* Style for the dropdowns */
+#tab-selector select {
+    font-family: monospace;
+    font-size: 12px;
+    padding: 6px 10px;
+    margin: 0 10px 20px 0;
+    background-color: #222;
+    color: #fff;
+    border: 1px solid #555;
+    border-radius: 4px;
+    outline: none;
+}
+
+#tab-selector select:hover {
+    border-color: #888;
+}
+
+#tab-selector select:focus {
+    border-color: #aaa;
+    box-shadow: 0 0 5px #555;
+}
+
+/* Container */
+#tab-container {
+    width: 90%;
+    margin: 20px auto;
+    font-family: monospace;
+}
+
+/* Each string row */
+.tab-line {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0px;
+}
+
+/* Static string labels */
+.string-label {
+    width: 40px;
+    font-weight: bold;
+    font-size: 36px;
+    flex-shrink: 0;
+}
+
+/* NEW: scrolling viewport (this is the key fix) */
+.tab-viewport {
+    overflow: hidden;
+    width: 100%;
+}
+
+/* Scrolling content */
+.tab-scroll {
+    display: inline-block;
+    white-space: nowrap;
+    padding-left: 100%;
+    animation: scroll-tab var(--scroll-duration, 15s) linear infinite;
+    font-size: 30px;
+    line-height: 1.5;
+}
+
+@keyframes scroll-tab {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+}

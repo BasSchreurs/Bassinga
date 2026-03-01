@@ -1,0 +1,94 @@
+/* === Base styles === */
+body {
+    font-family: monospace;
+    background: #111;
+    color: #fff;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 120px;
+    margin-bottom: 60px;
+    font-size: 36px;
+}
+
+.container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    text-align: left;
+    gap: 50px;
+    max-width: 1200px;
+    margin: 0 auto 100px auto;
+    padding: 0 20px;
+    flex-wrap: wrap; /* allows stacking on small screens */
+}
+
+.image img {
+    max-width: 400px;
+    width: 100%;
+    border: 1px solid #555;
+    border-radius: 15px;
+    display: block;
+}
+
+.box {
+    font-family: monospace;
+    font-size: 16px;
+    color: #fff;
+    flex: 1;
+    min-width: 300px;
+    background-color: #222;
+    padding: 30px 20px;
+    border: 1px solid #555;
+    border-radius: 15px;
+    box-sizing: border-box;
+}
+
+.box h3 {
+    display: block;
+    text-align: center;
+    margin: 30px 0 20px 0;
+}
+
+.box p {
+    text-align: left;
+    line-height: 1.5;
+}
+
+/* === Responsive tweaks === */
+@media (max-width: 700px) {
+    .container {
+        flex-direction: column; /* stack image and box */
+        align-items: center;    /* center everything */
+        gap: 30px;
+    }
+
+    .image img {
+        display: none !important;         /* scale image on smaller screens */
+    }
+
+    .box {
+        width: 90%;             /* make box narrower but centered */
+        padding: 25px 15px;
+    }
+}
+
+@media (max-width: 700px) {
+    h1 {
+        font-size: 28px;        /* smaller title on tiny screens */
+        margin-top: 80px;
+        margin-bottom: 40px;
+    }
+
+    .box h3 {
+        font-size: 20px;
+    }
+
+    .box p {
+        font-size: 14px;
+    }
+}

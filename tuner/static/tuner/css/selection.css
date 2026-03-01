@@ -1,0 +1,108 @@
+/* === Base styles for selection page === */
+body {
+    font-family: monospace;
+    background: #111;
+    color: #fff;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.home-button {
+    display: inline-block;
+    margin: 60px 0 20px 0; /* top 60px, bottom 20px */
+    padding: 10px 25px;
+    border: 1px solid #555;
+    border-radius: 12px;
+    background-color: #222;
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.home-button:hover {
+    background-color: #333;
+    color: #ffd700;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    font-size: 32px;
+}
+
+/* Container: stack boxes vertically */
+.container {
+    display: flex;
+    flex-direction: column; /* stack boxes */
+    align-items: center;    /* center horizontally */
+    gap: 30px;              /* space between boxes */
+    max-width: 800px;       /* optional: keep width reasonable */
+    margin: 0 auto 50px auto;
+    padding: 0 20px;
+}
+
+/* Box styling */
+.box {
+    font-family: monospace;
+    font-size: 16px;
+    color: #fff;
+    background-color: #222;
+    padding: 25px 20px;
+    border: 1px solid #555;
+    border-radius: 15px;
+    width: 100%;            /* full width of container */
+    box-sizing: border-box;
+}
+
+.box h3 {
+    text-align: center;
+    margin: 20px 0;
+    font-size: 22px;
+}
+
+.box ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.box ul li {
+    margin-bottom: 10px;
+}
+
+.box ul li a {
+    color: #fff;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.box ul li a:hover {
+    color: #ffd700; /* gold on hover */
+}
+
+/* === Responsive tweaks === */
+@media (max-width: 700px) {
+    h1 {
+        font-size: 26px;
+        margin-top: 60px;
+        margin-bottom: 30px;
+    }
+
+    .box h3 {
+        font-size: 18px;
+    }
+
+    .box {
+        padding: 20px 15px;
+    }
+
+    .box ul li {
+        font-size: 14px;
+    }
+
+    /* If any image exists inside boxes, hide it */
+    .box img {
+        display: none !important;
+    }
+}

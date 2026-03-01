@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bassinga Tuner</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'tuner/css/tuner.css' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'tuner/favicons/favicon.ico' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'tuner/favicons/favicon-16x16.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'tuner/favicons/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'tuner/favicons/favicon-48x48.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'tuner/favicons/favicon-64x64.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'tuner/favicons/favicon-96x96.png' %}">
+</head>
+<body>
+    <!-- Live note display -->
+    <h1 id="note-display">A</h1>
+    <p id="tuning-label">Standard tuning (E–A–D–G)</p>
+
+    <!-- Controls: Restart, Back, Scroll Speed inside a form -->
+    <form id="controls-form" onsubmit="return false;">
+        <button type=""button onclick="window.location.href='{% url 'home' %}'">Home</button>
+        <button type="button" onclick="window.location.href='{% url 'selection' %}'">Pick Song</button>
+        <button type="button" id="restart-button">Restart</button>
+        <button type="button" id="pause-button">Pause</button>
+        <label for="speed">Scroll Speed:</label>
+        <select id="speed" onchange="updateSpeed()">
+            <option value="4">0.25x</option>
+            <option value="2">0.5x</option>
+            <option value="1.33">0.75x</option>
+            <option value="1" selected>1x</option>
+            <option value="0.5">2x</option>
+        </select>
+    </form>
+
+    <!-- Scrolling bass tab with static string labels -->
+    <div id="tab-container">
+        <div class="tab-line">
+            <span class="string-label">G|</span>
+            <div class="tab-viewport">
+                <span class="tab-scroll" id="tab-G">----------------</span>
+            </div>
+        </div>
+        <div class="tab-line">
+            <span class="string-label">D|</span>
+            <div class="tab-viewport">
+                <span class="tab-scroll" id="tab-D">----------------</span>
+            </div>
+        </div>
+        <div class="tab-line">
+            <span class="string-label">A|</span>
+            <div class="tab-viewport">
+                <span class="tab-scroll" id="tab-A">----------------</span>
+            </div>
+        </div>
+        <div class="tab-line">
+            <span class="string-label">E|</span>
+            <div class="tab-viewport">
+                <span class="tab-scroll" id="tab-E">----------------</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- JS to update live note -->
+    <script>
+        async function updateNote() {
+            const response = await fetch('/get-note/');
+            const data = await response.json();
+            document.getElementById('note-display').innerText = data.note;
+        }
+        setInterval(updateNote, 200);
+    </script>
+
+    <!-- JS to load fret tab, restart scroll, and adjust speed -->
+    <script>
+        const fretTabData = {{ fret_tab|safe }};
+
+        function loadFretTab() {
+            if (!fretTabData) return;
+            document.getElementById("tab-E").innerText = fretTabData.G;
+            document.getElementById("tab-A").innerText = fretTabData.D;
+            document.getElementById("tab-D").innerText = fretTabData.A;
+            document.getElementById("tab-G").innerText = fretTabData.E;
+        }
+
+        function restartTab() {
+            document.querySelectorAll(".tab-scroll").forEach(el => {
+                el.style.animation = 'none';
+                void el.offsetWidth; // force reflow
+                el.style.animation = '';
+            });
+        }
+
+        function updateSpeed() {
+            const select = document.getElementById("speed");
+            const multiplier = parseFloat(select.value);
+            const baseDuration = 60; /* bigger number is slower */
+            const newDuration = baseDuration * multiplier;
+            document.querySelectorAll(".tab-scroll").forEach(el => {
+                el.style.setProperty("--scroll-duration", `${newDuration}s`);
+                el.style.animationPlayState = isPaused ? "paused" : "running";
+            });
+        }
+
+        let isPaused = false;
+
+            document.getElementById("pause-button").addEventListener("click", () => {
+        const tabScrolls = document.querySelectorAll(".tab-scroll");
+        if (!isPaused) {
+        // Pause animations
+            tabScrolls.forEach(el => el.style.animationPlayState = "paused");
+            document.getElementById("pause-button").innerText = "Play";
+            isPaused = true;
+        } else {
+        // Resume animations
+            tabScrolls.forEach(el => el.style.animationPlayState = "running");
+            document.getElementById("pause-button").innerText = "Pause";
+            isPaused = false;
+    }
+});
+
+
+        window.addEventListener('DOMContentLoaded', () => {
+            loadFretTab();
+            document.getElementById("restart-button").addEventListener('click', restartTab);
+            updateSpeed();
+        });
+    </script>
+</body>
+</html>

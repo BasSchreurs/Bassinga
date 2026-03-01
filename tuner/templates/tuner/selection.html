@@ -1,0 +1,88 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bassinga - Song Selection</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'tuner/favicons/favicon-16x16.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'tuner/favicons/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'tuner/favicons/favicon-48x48.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'tuner/favicons/favicon-64x64.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'tuner/favicons/favicon-96x96.png' %}">
+    <link rel="stylesheet" href="{% static 'tuner/css/selection.css' %}">
+</head>
+<body>
+<!-- Home button on top -->
+<div style="text-align:center; margin:20px 0;">
+    <a href="{% url 'home' %}" class="home-button">← Home</a>
+</div>
+
+<h1>Song & Scale Selection</h1>
+
+<div class="container">
+
+    <!-- Major -->
+    <div class="box">
+        <h3>Major</h3>
+        <ul>
+            {% for tab in major_tabs %}
+                <li><a href="{% url 'tuner' %}?tab_id={{ tab.id }}" style="color:#fff;">{{ tab.name }}</a></li>
+            {% empty %}
+                <li>No songs available</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <!-- Natural Minor -->
+    <div class="box">
+        <h3>Natural Minor</h3>
+        <ul>
+            {% for tab in natural_minor_tabs %}
+                <li><a href="{% url 'tuner' %}?tab_id={{ tab.id }}" style="color:#fff;">{{ tab.name }}</a></li>
+            {% empty %}
+                <li>No songs available</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <!-- Major Pentatonic -->
+    <div class="box">
+        <h3>Major Pentatonic</h3>
+        <ul>
+            {% for tab in major_pent_tabs %}
+                <li><a href="{% url 'tuner' %}?tab_id={{ tab.id }}" style="color:#fff;">{{ tab.name }}</a></li>
+            {% empty %}
+                <li>No songs available</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <!-- Minor Pentatonic -->
+    <div class="box">
+        <h3>Minor Pentatonic</h3>
+        <ul>
+            {% for tab in minor_pent_tabs %}
+                <li><a href="{% url 'tuner' %}?tab_id={{ tab.id }}" style="color:#fff;">{{ tab.name }}</a></li>
+            {% empty %}
+                <li>No songs available</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <!-- Blues -->
+    <div class="box">
+        <h3>Blues</h3>
+        <ul>
+            {% for tab in blues_tabs %}
+                <li><a href="{% url 'tuner' %}?tab_id={{ tab.id }}" style="color:#fff;">{{ tab.name }}</a></li>
+            {% empty %}
+                <li>No songs available</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+</div>
+
+</body>
+</html>
