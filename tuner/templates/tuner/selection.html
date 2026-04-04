@@ -24,9 +24,9 @@
 
     <!-- Major -->
     <div class="box">
-        <h3>Major</h3>
+        <h3>Natural Major</h3>
         <ul>
-            {% for tab in major_tabs %}
+            {% for tab in natural_major_tabs %}
                 <li><a href="{% url 'tuner' %}?tab_id={{ tab.id }}" style="color:#fff;">{{ tab.name }}</a></li>
             {% empty %}
                 <li>No songs available</li>
@@ -72,9 +72,9 @@
 
     <!-- Blues -->
     <div class="box">
-        <h3>Blues</h3>
+        <h3>Blues Minor</h3>
         <ul>
-            {% for tab in blues_tabs %}
+            {% for tab in blues_minor_tabs %}
                 <li><a href="{% url 'tuner' %}?tab_id={{ tab.id }}" style="color:#fff;">{{ tab.name }}</a></li>
             {% empty %}
                 <li>No songs available</li>

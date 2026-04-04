@@ -14,7 +14,7 @@
 <body>
     <!-- Live note display -->
     <h1 id="note-display">A</h1>
-    <p id="tuning-label">Standard tuning (E–A–D–G)</p>
+    <p id="song-name">{{ song_name }}</p>
 
     <!-- Controls: Restart, Back, Scroll Speed inside a form -->
     <form id="controls-form" onsubmit="return false;">
@@ -29,6 +29,7 @@
             <option value="1.33">0.75x</option>
             <option value="1" selected>1x</option>
             <option value="0.5">2x</option>
+            <option value="0.25">4x</option>
         </select>
     </form>
 
@@ -76,10 +77,10 @@
 
         function loadFretTab() {
             if (!fretTabData) return;
-            document.getElementById("tab-E").innerText = fretTabData.G;
-            document.getElementById("tab-A").innerText = fretTabData.D;
-            document.getElementById("tab-D").innerText = fretTabData.A;
-            document.getElementById("tab-G").innerText = fretTabData.E;
+            document.getElementById("tab-E").innerText = fretTabData.E;
+            document.getElementById("tab-A").innerText = fretTabData.A;
+            document.getElementById("tab-D").innerText = fretTabData.D;
+            document.getElementById("tab-G").innerText = fretTabData.G;
         }
 
         function restartTab() {

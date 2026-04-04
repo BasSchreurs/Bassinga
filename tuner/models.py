@@ -2,10 +2,10 @@ from django.db import models
 
 class FretTab(models.Model):
     name = models.CharField(max_length=100)
-    E = models.TextField()
-    A = models.TextField()
-    D = models.TextField()
     G = models.TextField()
+    D = models.TextField()
+    A = models.TextField()
+    E = models.TextField()
     position = models.PositiveIntegerField(default=0)  # manual sorting
 
     class Meta:

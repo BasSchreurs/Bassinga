@@ -38,6 +38,7 @@ def tuner_view(request):
     """
     tab_id = request.GET.get('tab_id')  # GET parameter: ?fret_tab_id=123
     fret_tab_data = None
+    song_name = None
 
     if tab_id:
         fret_tab_obj = get_object_or_404(FretTab, pk=tab_id)
@@ -47,9 +48,11 @@ def tuner_view(request):
             "A": fret_tab_obj.A,
             "E": fret_tab_obj.E
         })
+        song_name = fret_tab_obj.name
 
     context = {
-        "fret_tab": fret_tab_data
+        "fret_tab": fret_tab_data,
+        "song_name": song_name,
     }
     return render(request, "tuner/tuner.html", context)
 
@@ -82,18 +85,18 @@ def selection_view(request):
     all_tabs = FretTab.objects.all()
 
     # Create separate lists for each scale by checking the name prefix
-    major_tabs = [tab for tab in all_tabs if tab.name.lower().startswith("major")]
+    natural_major_tabs = [tab for tab in all_tabs if tab.name.lower().startswith("natural major")]
     natural_minor_tabs = [tab for tab in all_tabs if tab.name.lower().startswith("natural minor")]
     major_pent_tabs = [tab for tab in all_tabs if tab.name.lower().startswith("major pentatonic")]
     minor_pent_tabs = [tab for tab in all_tabs if tab.name.lower().startswith("minor pentatonic")]
-    blues_tabs = [tab for tab in all_tabs if tab.name.lower().startswith("blues")]
+    blues_minor_tabs = [tab for tab in all_tabs if tab.name.lower().startswith("blues minor")]
 
     context = {
-        "major_tabs": major_tabs,
+        "natural_major_tabs": natural_major_tabs,
         "natural_minor_tabs": natural_minor_tabs,
         "major_pent_tabs": major_pent_tabs,
         "minor_pent_tabs": minor_pent_tabs,
-        "blues_tabs": blues_tabs,
+        "blues_minor_tabs": blues_minor_tabs,
     }
 
     return render(request, 'tuner/selection.html', context)
