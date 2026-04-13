@@ -1,0 +1,21 @@
+services:
+  web:
+    build: .
+    expose:
+      - "8002"
+    env_file:
+      - .env
+    volumes:
+      - bassinga_static:/app/staticfiles
+    restart: always
+    networks:
+      - shared
+
+volumes:
+  bassinga_static:
+    external: true
+
+networks:
+  shared:
+    external: true
+    name: shared_network
