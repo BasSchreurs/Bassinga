@@ -15,3 +15,12 @@ services:
       options:
         max-size: "10m"
         max-file: "3"
+
+volumes:
+  bassinga_static:
+    external: true
+
+networks:
+  shared:
+    external: true
+    name: shared_network
